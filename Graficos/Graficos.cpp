@@ -60,6 +60,8 @@ void dibujar() {
 	glBindVertexArray(0);
 	//soltar el shader
 	shader->desenlazarShader();
+
+	figura->dibujar(GL_POLYGON);
 }
 
 void inicializarFigura() {
@@ -185,11 +187,8 @@ int main()
 	//Desenlazar el shader
 	shader->desenlazarShader();
 
-	//Habilitar el atributo solo en el vertex array en uso
-	glEnableVertexAttribArray(posicionID);
-
-	//Especificar a Opengl como usar la memoria con ese atributo
-	glVertexAttribPointer(posicionID, 3, GL_FLOAT, GL_FALSE, sizeof(Vertice), 0);
+	figura->shader = shader;
+	figura->inicializarVertexArray(posicionID, colorID);
 
 	//Crear un vertex array
 	glGenVertexArrays(1, &vertexArrayID);
@@ -203,6 +202,12 @@ int main()
 	glBufferData
 	(GL_ARRAY_BUFFER, sizeof(Vertice) * triangulo.size(), triangulo.data(), GL_STATIC_DRAW);
 
+	//Habilitar el atributo solo en el vertex array en uso
+	glEnableVertexAttribArray(posicionID);
+	glEnableVertexAttribArray(colorID);
+
+	//Especificar a Opengl como usar la memoria con ese atributo
+	glVertexAttribPointer(posicionID, 3, GL_FLOAT, GL_FALSE, sizeof(Vertice), 0);
 
 	//soltarlos
 	glBindVertexArray(0);

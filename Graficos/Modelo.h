@@ -17,11 +17,12 @@ class Modelo {
 public: 
 	vector<Vertice> vertices;
 	Shader *shader;
-	GLuint vertexAarrayID;
+	GLuint vertexArrayID;
 	GLuint bufferID;
 	Modelo();
 
-	void inicializarVertexArray( GLuint posicionID, GLuint colorID)
+	void inicializarVertexArray(GLuint posicionID, GLuint colorID);
+	void dibujar(GLenum modoDibujo);
 
 
 };
