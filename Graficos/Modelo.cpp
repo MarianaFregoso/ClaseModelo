@@ -40,3 +40,5 @@ void Modelo::dibujar(GLenum modoDibujo) {
 	glBindVertexArray(0);
 	shader->desenlazarShader();
 }
+
+
