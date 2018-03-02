@@ -18,11 +18,11 @@ using namespace std;
 
 GLfloat red, green, blue;
 
-
+GLuint posicionID;
 GLuint colorID;
 
 vector<Vertice> triangulo;
-GLuint posicionID;
+
 GLuint vertexArrayID;
 GLuint bufferID;
 
