@@ -7,6 +7,8 @@
 #define GLEW_STATIC
 #include "GL\glew.h"
 #include "GLFW\glfw3.h"
+#include "glm\gtx\transform.hpp"
+#include "glm\glm.hpp"
 
 #include <iostream>
 
@@ -16,10 +18,12 @@
 
 using namespace std;
 
+
 GLfloat red, green, blue;
 
 GLuint posicionID;
 GLuint colorID;
+GLuint transformacionesID;
 
 Modelo *figura;
 Modelo *figura2;
@@ -43,11 +47,11 @@ void dibujar() {
 void inicializarFigura() {
 	figura = new Modelo();
 
-	Vertice v1 = { vec3(-1.0f, 0.5f, 0.0f), vec4(1.0f, 0.0f, 1.0f, 1.0f) };
+	Vertice v1 = { vec4(-1.0f, 0.5f, 0.0f, 1.0f), vec4(1.0f, 0.0f, 1.0f, 1.0f) };
 
-	Vertice v2 = { vec3(0.0f, -0.5f, 0.0f), vec4(1.0f, 0.0f, 1.0f, 1.0f) };
+	Vertice v2 = { vec4(0.0f, -0.5f, 0.0f, 1.0f), vec4(1.0f, 0.0f, 1.0f, 1.0f) };
 
-	Vertice v3 = { vec3(1.0f, 0.5f, 0.0f), vec4(1.0f, 0.0f, 1.0f, 1.0f) };
+	Vertice v3 = { vec4(1.0f, 0.5f, 0.0f, 1.0f), vec4(1.0f, 0.0f, 1.0f, 1.0f) };
 
 	figura->vertices.push_back(v1);
 	figura->vertices.push_back(v2);
@@ -57,13 +61,13 @@ void inicializarFigura() {
 
 void inicializarCuadrado() {
 	figura2 = new Modelo();
-	Vertice v1 = { vec3(-0.5f, -0.5f, 0.0f), vec4(1.0f, 0.5f, 0.7f, 0.5f) };
+	Vertice v1 = { vec4(-0.5f, -0.5f, 0.0f, 1.0f), vec4(1.0f, 0.5f, 0.7f, 0.5f) };
 
-	Vertice v2 = { vec3(-0.5f, 0.5f, 0.0f), vec4(0.2f, 0.5f, 1.0f, 0.5f) };
+	Vertice v2 = { vec4(-0.5f, 0.5f, 0.0f, 1.0f), vec4(0.2f, 0.5f, 1.0f, 0.5f) };
 
-	Vertice v3 = { vec3(0.5f, 0.5f, 0.0f), vec4(0.5f, 0.7f, 1.0f, 0.1f) };
+	Vertice v3 = { vec4(0.5f, 0.5f, 0.0f, 1.0f), vec4(0.5f, 0.7f, 1.0f, 0.1f) };
 
-	Vertice v4 = { vec3(0.5f, -0.5f, 0.0f), vec4(1.0f, 0.7f, 1.0f, 0.3f) };
+	Vertice v4 = { vec4(0.5f, -0.5f, 0.0f, 1.0f), vec4(1.0f, 0.7f, 1.0f, 0.3f) };
 
 	figura2->vertices.push_back(v1);
 	figura2->vertices.push_back(v2);
@@ -131,6 +135,7 @@ int main()
 
 	posicionID = glGetAttribLocation(shader->getID(), "posicion");
 	colorID = glGetAttribLocation(shader->getID(), "color");
+	transformacionesID = glGetUniformLocation (shader->getID(), "transformaciones");
 
 	//Desenlazar el shader
 	shader->desenlazarShader();

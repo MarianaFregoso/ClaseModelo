@@ -5,7 +5,7 @@ Modelo::Modelo(){
 
 };
 
-void Modelo::inicializarVertexArray(GLuint posicionID, GLuint colorID){
+void Modelo::inicializarVertexArray(GLuint posicionID, GLuint colorID, GLuint transformaciones){
 
 	//Crear un vertex array
 	glGenVertexArrays(1, &vertexArrayID);
@@ -25,8 +25,8 @@ void Modelo::inicializarVertexArray(GLuint posicionID, GLuint colorID){
 	glEnableVertexAttribArray(colorID);
 
 	//Especificar a Opengl como usar la memoria con ese atributo
-	glVertexAttribPointer(posicionID, 3, GL_FLOAT, GL_FALSE, sizeof(Vertice), 0);
-	glVertexAttribPointer(colorID, 4, GL_FLOAT, GL_FALSE, sizeof(Vertice), (void*) sizeof(vec3));
+	glVertexAttribPointer(posicionID, 4, GL_FLOAT, GL_FALSE, sizeof(Vertice), 0);
+	glVertexAttribPointer(colorID, 4, GL_FLOAT, GL_FALSE, sizeof(Vertice), (void*) sizeof(vec4));
 
 	//soltarlos
 	glBindVertexArray(0);
@@ -36,6 +36,9 @@ void Modelo::inicializarVertexArray(GLuint posicionID, GLuint colorID){
 void Modelo::dibujar(GLenum modoDibujo) {
 	shader->enlazarShader();
 	glBindVertexArray(vertexArrayID);
+
+	glUniformMatrix4fv()
+
 	glDrawArrays(modoDibujo,0,vertices.size());
 	glBindVertexArray(0);
 	shader->desenlazarShader();
