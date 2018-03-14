@@ -29,9 +29,20 @@ Modelo *figura;
 Modelo *figura2;
 
 Shader *shader;
+//Declaración de ventana
+GLFWwindow *window;
 
 void actualizar() {
+	int estadoderecha = glfwGetKey(window, GLFW_KEY_RIGHT);
+	if (estadoderecha == GLFW_PRESS) {
+		/*figura2->transformaciones =
+			translate(figura2->transformaciones, vec3(0.001f, 0.0f, 0.0f));*/
+		/*figura2->transformaciones = 
+			scale(figura2->transformaciones, vec3(1.001f, 1.001f, 1.001f));*/
+		figura2->transformaciones =
+			rotate(figura2->transformaciones, 0.05f, vec3(0.0f, 0.0f, 1.0f));
 
+	}
 
 }
 
@@ -79,8 +90,7 @@ void inicializarCuadrado() {
 
 int main()
 {
-	//Declaración de ventana
-	GLFWwindow *window;
+	
 	//Propiedades de la ventana
 	GLfloat ancho = 1024;
 	GLfloat alto = 768;
@@ -141,10 +151,10 @@ int main()
 	shader->desenlazarShader();
 
 	figura->shader = shader;
-	figura->inicializarVertexArray(posicionID, colorID);
+	figura->inicializarVertexArray(posicionID, colorID,transformacionesID);
 
 	figura2->shader = shader;
-	figura2->inicializarVertexArray(posicionID, colorID);
+	figura2->inicializarVertexArray(posicionID, colorID,transformacionesID);
 
 
 
